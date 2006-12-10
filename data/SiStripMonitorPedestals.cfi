@@ -1,0 +1,19 @@
+module PedsMon = SiStripMonitorPedestals {
+  string DigiProducer="SiStripDigis"
+  string OutPutFileName="prova1.root"
+  untracked bool  UseFedKey = true
+  bool OutputMEsInRootFile = true
+  PSet PedestalsPSet =
+   {
+	string CalculatorAlgorithm = "TT6"
+	int32 NumCMstripsInGroup =128
+	int32 MaskCalculationFlag =1
+	double MaskNoiseCut = 6.
+	double MaskDeadCut = 0.7
+	double MaskTruncationCut = 0.05
+	double CutToAvoidSignal =3.
+	int32 NumberOfEventsForInit = 200
+	int32 NumberOfEventsForIteration = 100
+    }
+	
+}
