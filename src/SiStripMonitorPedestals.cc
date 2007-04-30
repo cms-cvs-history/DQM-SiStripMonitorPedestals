@@ -13,12 +13,13 @@
 //
 // Original Author:  Simone Gennai and Suchandra Dutta
 //         Created:  Sat Feb  4 20:49:10 CET 2006
-// $Id: SiStripMonitorPedestals.cc,v 1.14 2007/02/17 18:18:52 giordano Exp $
+// $Id: SiStripMonitorPedestals.cc,v 1.18 2007/03/29 15:33:50 dutta Exp $
 //
 //
 
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
+#include "DataFormats/Common/interface/Handle.h"
 
 #include "DQMServices/Core/interface/DaqMonitorBEInterface.h"
 
@@ -33,7 +34,6 @@
 
 #include <FWCore/Framework/interface/Event.h>
 #include <FWCore/Framework/interface/EventSetup.h>
-#include "FWCore/Framework/interface/Handle.h"
 #include <FWCore/ParameterSet/interface/ParameterSet.h>
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 // data formats
@@ -112,51 +112,67 @@ void SiStripMonitorPedestals::beginJob(const edm::EventSetup& es){
       //Pedestals histos
       hid = hidmanager.createHistoId("PedsPerStrip","det", detid);
       local_modmes.PedsPerStrip = dbe_->book1D(hid, hid, nStrip,0.5,nStrip+0.5); //to modify the size binning 
+      (local_modmes.PedsPerStrip)->setAxisTitle("Pedestal (ADC)  vs Strip Number ",1);
 
       hid = hidmanager.createHistoId("PedsDistribution","det", detid);
       local_modmes.PedsDistribution = dbe_->book2D(hid, hid, napvs,-0.5,napvs-0.5, 300, 200, 500); //to modify the size binning 
+      (local_modmes.PedsDistribution)->setAxisTitle("Apv Number",1);
+      (local_modmes.PedsDistribution)->setAxisTitle("Mean Pedestal Value (ADC)",2);
 
       hid = hidmanager.createHistoId("PedsEvolution","det", detid);
       local_modmes.PedsEvolution = dbe_->book2D(hid, hid, napvs,-0.5,napvs-0.5, 50, 0., 50.); //to modify the size binning 
+      (local_modmes.PedsEvolution)->setAxisTitle("Apv Number",1);
+      (local_modmes.PedsEvolution)->setAxisTitle("Iteration Number",2);
 
       //Noise histos
       hid = hidmanager.createHistoId("CMSubNoisePerStrip","det", detid);
       local_modmes.CMSubNoisePerStrip = dbe_->book1D(hid, hid, nStrip,0.5,nStrip+0.5);
+      (local_modmes.CMSubNoisePerStrip)->setAxisTitle("CMSubNoise (ADC) vs Strip Number",1);
 
       hid = hidmanager.createHistoId("RawNoisePerStrip","det", detid);
       local_modmes.RawNoisePerStrip = dbe_->book1D(hid, hid, nStrip,0.5,nStrip+0.5);
+      (local_modmes.RawNoisePerStrip)->setAxisTitle("RawNoise(ADC) vs Strip Number",1);
 
       hid = hidmanager.createHistoId("CMSubNoiseProfile","det", detid);
       local_modmes.CMSubNoiseProfile = dbe_->bookProfile(hid, hid, nStrip,0.5,nStrip+0.5, 100, 0., 100.);
+      (local_modmes.CMSubNoiseProfile)->setAxisTitle("Mean of CMSubNoise (ADC) vs Strip Number",1);
 
       hid = hidmanager.createHistoId("RawNoiseProfile","det", detid);
       local_modmes.RawNoiseProfile = dbe_->bookProfile(hid, hid, nStrip,0.5,nStrip+0.5, 100, 0., 100.);
-
+      (local_modmes.RawNoiseProfile)->setAxisTitle("Mean of RawNoise (ADC) vs Strip Number",1);
 
       hid = hidmanager.createHistoId("NoisyStrips","det", detid);
       local_modmes.NoisyStrips = dbe_->book2D(hid, hid, nStrip,0.5,nStrip+0.5,6,-0.5,5.5);
+      (local_modmes.NoisyStrips)->setAxisTitle("Strip Number",1);
+      (local_modmes.NoisyStrips)->setAxisTitle("Flag Value",2);
 
       hid = hidmanager.createHistoId("NoisyStripDistribution","det", detid);
       local_modmes.NoisyStripDistribution = dbe_->book1D(hid, hid, 11, -0.5,10.5);
+      (local_modmes.NoisyStripDistribution)->setAxisTitle("Flag Value",1);
 
       //Common Mode histos
       hid = hidmanager.createHistoId("CMDistribution","det", detid);
       local_modmes.CMDistribution = dbe_->book2D(hid, hid, napvs,-0.5,napvs-0.5, 150, -15., 15.); 
+      (local_modmes.CMDistribution)->setAxisTitle("Common Mode (ADC) vs APV Number",1);
 
       hid = hidmanager.createHistoId("CMSlopeDistribution","det", detid);
       local_modmes.CMSlopeDistribution = dbe_->book2D(hid, hid, napvs,-0.5,napvs-0.5, 100, -0.05, 0.05); 
+      (local_modmes.CMSlopeDistribution)->setAxisTitle("Common Mode Slope vs APV Number",1);
 
       // data from CondDB
 
       //Pedestals histos
       hid = hidmanager.createHistoId("PedsPerStripFromCondDB","det", detid);
       local_modmes.PedsPerStripDB = dbe_->book1D(hid, hid, nStrip,0.5,nStrip+0.5); //to modify the size binning 
+      (local_modmes.PedsPerStripDB)->setAxisTitle("Pedestal from CondDB(ADC) vs Strip Number",1);
 
       hid = hidmanager.createHistoId("CMSubNoisePerStripFromCondDB","det", detid);
       local_modmes.CMSubNoisePerStripDB = dbe_->book1D(hid, hid, nStrip,0.5,nStrip+0.5);
+      (local_modmes.CMSubNoisePerStripDB)->setAxisTitle("CMSubNoise from CondDB(ADC) vs Strip Number",1);
 
       hid = hidmanager.createHistoId("NoisyStripsFromCondDB","det", detid);
       local_modmes.NoisyStripsDB = dbe_->book2D(hid, hid, nStrip,0.5,nStrip+0.5,6,-0.5,5.5);
+      (local_modmes.NoisyStripsDB)->setAxisTitle("Strip Flag from CondDB(ADC) vs Strip Number",1);
     
       // append to PedMEs
       PedMEs.insert( std::make_pair(detid, local_modmes));
@@ -233,7 +249,13 @@ void SiStripMonitorPedestals::analyze(const edm::Event& iEvent, const edm::Event
     if (digis->data.size() == 0 || 
         digis->data.size() > 768 || 
         digis == digi_collection->end() ) {
-         std::cout <<  " Event " <<  nEvTot_ << " DetId " <<  detid << " # of Digis " << digis->data.size() << std::endl;
+         std::cout <<  " Event " <<  nEvTot_ << " DetId " <<  detid << " # of Digis " << digis->data.size() ;
+	 std::vector<FedChannelConnection> fed_conns = detcabling->getConnections(detid);
+         for (unsigned int  k = 0; k < fed_conns.size() ; k++) {
+           if (k==0) std::cout <<  " Fed Id " << fed_conns[k].fedId() << " Channel " << fed_conns[k].fedCh();
+           else  std::cout <<  " Channel " << fed_conns[k].fedCh();
+         }
+         std::cout << std::endl;
          continue;
     }
 
