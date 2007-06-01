@@ -5,7 +5,7 @@ module PedsMon = SiStripMonitorPedestals {
   string DigiProducer="SiStripDigis"
   string OutPutFileName="prova1.root"
   untracked bool  UseFedKey = true
-  bool OutputMEsInRootFile = true
+  bool OutputMEsInRootFile = false
   PSet PedestalsPSet =
    {
 	string CalculatorAlgorithm = "TT6"
