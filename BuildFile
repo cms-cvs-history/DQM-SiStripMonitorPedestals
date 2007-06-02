@@ -1,7 +1,7 @@
 <use name=FWCore/Framework>
 <use name=FWCore/ParameterSet>
 <use name=FWCore/MessageLogger>
-<use name=FWCore/PluginManager>
+<use name=Foundation/PluginManager>
 <use name=Utilities/Timing>
 <use name=DataFormats/Common>
 <use name=DQMServices/Core>
@@ -25,7 +25,7 @@
 <use name=CondFormats/DataRecord>
 <use name=CondCore/DBOutputService>
 
-<flags EDM_PLUGIN=1>
+<flags SEAL_PLUGIN_NAME="DQMSiStripMonitorPedestals">
 
 <export>
    <lib name=DQMSiStripMonitorPedestals>
