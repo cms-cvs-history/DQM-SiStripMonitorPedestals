@@ -3,7 +3,7 @@ include "CommonTools/SiStripZeroSuppression/data/SiStripNoiseService.cfi"
 
 module PedsMon = SiStripMonitorPedestals {
   string DigiProducer="SiStripDigis"
-  string OutPutFileName="prova1.root"
+  string OutPutFileName="SiStripPedestal.root"
   untracked bool  UseFedKey = true
   bool OutputMEsInRootFile = false
   PSet PedestalsPSet =
