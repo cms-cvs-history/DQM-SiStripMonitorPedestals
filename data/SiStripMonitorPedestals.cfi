@@ -6,6 +6,7 @@ module PedsMon = SiStripMonitorPedestals {
   string OutPutFileName="SiStripPedestal.root"
   untracked bool  UseFedKey = true
   bool OutputMEsInRootFile = false
+  string RunTypeFlag = "AllPlots"
   PSet PedestalsPSet =
    {
 	string CalculatorAlgorithm = "TT6"
