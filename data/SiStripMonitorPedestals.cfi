@@ -1,6 +1,3 @@
-#include SiStripNoiseService parameters to be used in case UseCalibDataFromDB=false
-include "CommonTools/SiStripZeroSuppression/data/SiStripNoiseService.cfi"
-
 module PedsMon = SiStripMonitorPedestals {
   string DigiProducer="SiStripDigis"
   string OutPutFileName="SiStripPedestal.root"
@@ -20,15 +17,4 @@ module PedsMon = SiStripMonitorPedestals {
 	int32 NumberOfEventsForIteration = 100
     }
 
-    ##
-    ##Parameters to configure SiStripNoiseService and SiStripPedestalService
-    ##
-    
-    using SiStripNoiseServiceParameters
-
-    uint32  PedestalValue      = 30
-    double  LowThValue         =  2
-    double  HighThValue        =  5
-    
-    ##	
 }
