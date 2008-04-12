@@ -1,6 +1,6 @@
 
 module QualityMon = SiStripMonitorQuality {
   string OutputFileName="SiStripQuality.root"
-  string dataLabel = "test1"
+  string StripQualityLabel = "test1"
   bool OutputMEsInRootFile = false
 }
