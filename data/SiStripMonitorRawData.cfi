@@ -1,6 +1,6 @@
 
 module RawDataMon = SiStripMonitorRawData {
-  string DigiProducer="SiStripDigis"
+  string DigiProducer="siStripDigis"
   string OutputFileName="SiStripRawData.root"
   bool OutputMEsInRootFile = false
 }

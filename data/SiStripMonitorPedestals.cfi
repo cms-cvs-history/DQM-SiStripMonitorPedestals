@@ -1,5 +1,5 @@
 module PedsMon = SiStripMonitorPedestals {
-  string DigiProducer="SiStripDigis"
+  string DigiProducer="siStripDigis"
   string OutPutFileName="SiStripPedestal.root"
   untracked bool  UseFedKey = true
   bool OutputMEsInRootFile = false
