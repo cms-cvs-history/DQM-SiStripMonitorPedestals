@@ -9,6 +9,8 @@ module PedsMon = SiStripMonitorPedestals {
   PSet PedestalsPSet =
    {
 	string CalculatorAlgorithm = "TT6"
+        string CMType              = "TT6"
+        bool useDB                 = false
 	int32 NumCMstripsInGroup =128
 	int32 MaskCalculationFlag =1
 	double MaskNoiseCut = 6.
