@@ -3,8 +3,8 @@ module PedsMon = SiStripMonitorPedestals {
   string OutPutFileName="SiStripPedestal.root"
   untracked bool  UseFedKey = true
   bool OutputMEsInRootFile = false
-  string RunTypeFlag = "AllPlots" //Options : ConDBPlotsOnly , CalculatedPlotsOnly, AllPlots
-  string StripQualityLabel = "test1"
+  string RunTypeFlag = "CalculatedPlotsOnly" //Options : ConDBPlotsOnly , CalculatedPlotsOnly, AllPlots
+  string StripQualityLabel = ""
 
   PSet PedestalsPSet =
    {
